@@ -1,0 +1,19 @@
+JOIN
+
+SELECT * FROM Table1 Join Table2 ON Table1.Field1=Table2.Field2
+'OR'
+SELECT * FROM Table1,Table2 WHERE Table1.Field1=Table2.Field2
+
+"the above will display list of only values that are present in both tables."
+
+SELECT * FROM Students LEFT JOIN Phone_List ON Students.StudentId=Phone_List.StudentId
+'Adding the LEFT will add all the values of the first table even if the secont table does not exits'
+SELECT * FROM Students LEFT JOIN Phone_List ON Students.StudentId=Phone_List.StudentId ORDER BY Students.StudentId
+
+we have 
+RIGHT JOIN 'Returns values of the right Table even if it doesnt exist on the left'
+FULL JOIN 'Returns all Values'
+
+'We can perform a complex join by joining all the tables that are related by any field'
+SELECT * FROM Students JOIN Exam_Result ON Students.StudentId=Exam_Result.StudentId 
+JOIN St_Group ON Students.GroupCode=ST_Group.GroupCode

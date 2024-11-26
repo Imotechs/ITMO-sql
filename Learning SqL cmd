@@ -1,0 +1,35 @@
+Agregation 
+SELECT COUNT(*) AS Students FROM Students
+SELECT COUNT(*) AS NOS,MAX(BirthDate) AS Students FROM Students
+
+SELECT GroupCode, COUNT(*) AS Number_of_Students FROM Students GROUP BY GroupCode HAVING COUNT(*)>7
+        GROUPCODE	NUMBER_OF_STUDENTS
+        B2020_2	        8
+SELECT GroupCode, COUNT(*) AS Number_of_Students FROM Students GROUP BY GroupCode HAVING COUNT(*)<8 AND GroupCode LIKE 'B%'
+        GROUPCODE	NUMBER_OF_STUDENTS
+        B2020_2	        8
+        B2020_1	        7
+
+Display the number of grades that the student received with the ID (student book record number) 345576.
+SELECT count(*) FROM Exam_Result WHERE StudentId = 345576
+SELECT count(*) FROM Exam_Result WHERE StudentId IN (345576)
+SELECT count(Grade) FROM Exam_Result WHERE StudentId = 345576
+
+'Select Execussion Order'
+ FROM 'ask fo the table name'
+WHERE 'the the records from the table that match the conditions'
+GROUP BY "the rows are grouped according to the criteria after grup by"
+HAVING 'then filtered with the having keywoard'
+ORDER BY ' then the result is ordered as desired'
+
+' combining select commands'
+SELECT StudentName,BirthDate FROM Students WHERE BirthDate = (SELECT Max(BirthDate) FROM Students)
+'the above will get the youngest student name and birthday from students'
+
+'making inter table queries'
+SELECT StudentName FROM Students WHERE GroupCode =(SELECT GroupCode FROM St_Group WHERE Specialization='Nanotechnology')
+' ths wilpull out all the students by group code in nanotechnology and ge their names in Students'
+'Pulling  results from a table to make a query in another'
+SELECT StudentName,GroupCode,(SELECT Specialization  FROM St_Group WHERE St_Group.GroupCode=Students.GroupCode) 
+AS Secialization FROM Students 
+

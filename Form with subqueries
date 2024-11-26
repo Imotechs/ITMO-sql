@@ -1,0 +1,16 @@
+'Form with '
+EXISTS
+ANY
+ALL
+
+'Using Exists'
+SELECT StudentName,StudentId FROM Students WHERE EXISTS(SELECT * FROM Phone_List WHERE Students.StudentId=Phone_List.StudentId)
+'We can add the NOT to get students without phone number'
+SELECT StudentName,StudentId FROM Students WHERE  NOT EXISTS(SELECT * FROM Phone_List WHERE Students.StudentId=Phone_List.StudentId)
+'Using the ANY'
+
+SELECT StudentName,StudentId FROM Students WHERE 2=ANY(SELECT Grade FROM Exam_result WHERE Students.StudentId=Exam_result.StudentId)
+
+'Write a query that will display the names of courses and exam dates for these courses. To select course names use the nested subquery.
+ Name the column with the course name in the final selection Source Title. Do not change the order of the fields!'
+SELECT (SELECT CourseTitle FROM Course WHERE Course.CourseId=Exam_Sheet.CourseId) AS CourseTitle, ExamDate FROM Exam_Sheet

@@ -1,0 +1,47 @@
+'Write a query to the mass_transport database and determine which route the BUS 
+with the onboard number 6263 travelled?'
+SELECT DISTINCT Route_Number FROM Route_By_Stops WHERE Id_Vehicle IN (SELECT Id_Vehicle FROM Track WHERE Carrier_Board_Num ='6263' )
+        191
+        30
+        1
+        46
+        14
+        10
+        49
+'Write a query to the mass_transport database and determine 
+which route the BUS with the onboard number 2481 travelled?'
+SELECT DISTINCT Route_Number FROM Route_By_Stops WHERE Id_Vehicle IN (SELECT Id_Vehicle FROM Track WHERE Carrier_Board_Num ='2481' )
+        191
+        30
+        1
+        46
+        14
+        10
+        49
+'Write a request to the mass_transport database and determine how many public
+ transport units (with different onboard numbers) worked on the 10 route (type of transport — BUS)?'
+
+SELECT COUNT(DISTINCT CARRIER_BOARD_NUM) FROM (SELECT *FROM Track JOIN Vehicle ON Vehicle.Id_Vehicle=Track.Id_Vehicle) WHERE Route_Number='10' AND Vehicle_Name_En ='BUS'
+'Answer 9'
+
+'Write a query to the mass_transport database and determine what is 
+the maximum distance between neighboring stops on the route BUS number 10?'
+SELECT MAX(DISTANCE_BACK) FROM ROUTE_BY_STOPS WHERE ROUTE_NUMBER ='10'
+'AnS 1210'
+
+'Write a query to the mass_transport database and determine the longitude and latitude 
+of the 3-th stop in the DIRECT direction of the BUS route number 46.'
+SELECT Longitude,Latitude FROM (SELECT* FROM ROUTE_BY_STOPS JOIN STOPS ON ROUTE_BY_STOPS.ID_STOP=STOPS.ID_STOP JOIN Direction ON ROUTE_BY_STOPS.ID_DIRECTION=Direction.ID_DIRECTION JOIN Vehicle ON  ROUTE_BY_STOPS.Id_Vehicle=Vehicle.Id_Vehicle) 
+ WHERE  STOP_NUMBER='3' AND VEHICLE_NAME_EN='BUS' AND ROUTE_NUMBER='46'
+    LONGITUDE	LATITUDE
+    30.4246235	59.93147831
+    30.2997875	59.97868769
+
+'Write a query to the mass_transport database and determine the longitude and latitude of 
+the 8-th stop in the DIRECT direction of the BUS route number 46.'
+SELECT Longitude,Latitude FROM (SELECT* FROM ROUTE_BY_STOPS JOIN STOPS ON ROUTE_BY_STOPS.ID_STOP=STOPS.ID_STOP JOIN Direction ON ROUTE_BY_STOPS.ID_DIRECTION=Direction.ID_DIRECTION JOIN Vehicle ON  ROUTE_BY_STOPS.Id_Vehicle=Vehicle.Id_Vehicle) 
+ WHERE  STOP_NUMBER='8' AND VEHICLE_NAME_EN='BUS' AND ROUTE_NUMBER='46'
+    LONGITUDE	LATITUDE
+    30.3803501	59.92721402
+    30.3150368	59.96194555
+

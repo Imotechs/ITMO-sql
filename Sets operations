@@ -1,0 +1,33 @@
+Union
+Intersect
+Except
+
+'Union'
+SELECT StudentId,StudentName FROM Students WHERE BirthDate < '01/01/1999'
+    UNION SELECT StudentId,StudentName FROM Students WHERE BirthDate > '06/01/1998'
+
+'the above will remove all duplicate recods. if you want to allow duplicates, use the UNION ALL'
+SELECT StudentId,StudentName FROM Students WHERE BirthDate < '01/01/1999'
+    UNION ALL SELECT StudentId,StudentName FROM Students WHERE BirthDate > '06/01/1998'
+
+'Usint INTERSECT '
+SELECT StudentId,StudentName FROM Students WHERE BirthDate < '01/01/1999'
+    INTERSECT SELECT StudentId,StudentName FROM Students WHERE BirthDate > '06/01/1998'
+    'will pull only the data that has same records in two of them'
+
+Write a query that will display the IDs of students who have not passed any exams (if there are any). Use set-theoretic operations.
+
+SELECT StudentId FROM STUDENTS MINUS SELECT StudentId FROM EXAM_RESULT
+
+'
+Write a query that will display the names of teachers who were not listed in the exam schedule for the course with the identifier 1 
+(if there are any). In this query use the query from the previous task as a nested subquery.
+'
+SELECT TeacherName FROM Teacher Where TeacherId IN (SELECT TeacherId FROM Teacher MINUS SELECT TeacherId FROM Exam_Sheet WHERE CourseId = 1)
+
+
+'Write a query that will display the names of teachers who were not listed in the exam schedule for the course with the name 
+Data processing and analysis (if there are any). To determine the course ID use the nested subquery!'
+
+SELECT TeacherName From Teacher WHERE TeacherId IN (SELECT TeacherId FROM Exam_Sheet WHERE TeacherId 
+NOT IN (SELECT CourseId FROM Course WHERE CourseTitle='Data processing and analysis'))

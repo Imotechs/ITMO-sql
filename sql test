@@ -1,0 +1,18 @@
+Display the student book record numbers (student IDs) and the average scores that students received for all exams
+SELECT StudentId, AVG(Grade) FROM Exam_Result GROUP BY StudentId
+
+Write a query that displays the minimum and maximum scores received by students at exams.
+SELECT MIN(Grade), MAX(Grade) FROM Exam_Result
+SELECT MIN(Grade) as Min, MAX(Grade) as max FROM Exam_Result
+
+Write a query that displays the number of students who have passed the exams (i.e. those students who are mentioned in the Exam_Result table with any exam result)
+SELECT COUNT(DISTINCT STudentId) FROM Exam_Result
+
+Write a query that displays the sum of the points received on all exams to students with the number 345588
+SELECT SUM(Grade) FROM Exam_Result WHERE StudentID=345588
+
+Write a query that for students who have passed exams will display the student book record numbers and the number of different grades received on the exams
+SELECT StudentId, COUNT(Grade) FROM Exam_Result  GROUP BY STudentId
+
+Write a query that will display the student book record numbers of the excellent students (the average score is 5). Use the GROUP BY construction.
+SELECT StudentId FROM Exam_Result GROUP BY StudentID HAVING AVG(Grade)=5
