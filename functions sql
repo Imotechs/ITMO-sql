@@ -1,0 +1,28 @@
+'the Cast function'
+
+CAST(<EXPR> AS <DATATYE>)
+CAST('5' AS INTEGER)' CONvert a char to an integer'
+CAST(5 AS CHAR(7))'does the opp'
+
+'the extract' 
+SELECT studentname, Extract(year FROM birthdate) AS birth_year FROM students WHERE birthdate IS NOT NULL ORDER BY studentname
+
+
+'Display the names of students whose birthdays are in the current month 
+(the current month should be calculated inside the query from the current date).'
+SELECT studentname FROM students WHERE Extract(month FROM CURRENT_DATE) = Extract(month FROM birthdate)
+
+'Display the names of 
+students whose birthdays are in the current month
+ (the current month should be calculated inside the query from the current date).'
+ SELECT studentname, Extract(month FROM BirthDate) AS birth_month FROM Students WHERE birth_month = MONTH(CURRENT_DATE)
+ 
+ 'Display a list of students names in uppercase, sorted by date of birth in ascending order. Name the output field upper_name
+  (do not use double quotes, this is a limitation of the verification system).'
+  SELECT UPPER(StudentName)AS Upper_name FROM Students ORDER BY Students.BirthDate ASC
+
+  'Display the student IDs and their corresponding average scores on the exams
+   passed with an accuracy of hundredths (call this field avg_grade, do not use double quotes, this is a limitation of the verification system). 
+  Sort the list in descending order of the average score.'
+
+SELECT StudentId, (SELECT AVG(Grade) FROM EXAM_RESULT WHERE EXAM_RESULT.StudentId = Students.StudentId)  AS avg_grage FROM Students Group By StudentId

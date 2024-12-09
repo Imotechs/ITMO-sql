@@ -1,0 +1,32 @@
+'Determine how many buses will pass the stop ШКИПЕРСКИЙ ПРОТОК (тест)
+ with the ID 4489 in the interval [14:00, 15:00) September 9, 2019 .'
+SELECT COUNT(*) AS BUses_Count FROM TRACK WHERE ID_STOP='4489' AND  stop_time_real >= to_date('09/09/2019 14:00', 'dd/mm/yyyy hh24:mi') AND stop_time_real < to_date('09/09/2019 15:00', 'dd/mm/yyyy hh24:mi')
+
+
+SELECT COUNT(DISTINCT t.CARRIER_BOARD_NUM) AS unit_count
+FROM ROUTE_BY_STOPS r
+JOIN TRACK t ON r.ID_VEHICLE = t.ID_VEHICLE
+WHERE t.ROUTE_NUMBER = '1'
+  AND t.stop_time_real >= TO_DATE('09/09/2019 10:00', 'DD/MM/YYYY HH24:MI')
+  AND t.stop_time_real < TO_DATE('09/09/2019 11:00', 'DD/MM/YYYY HH24:MI');
+
+
+
+"""
+Let's imagine that you are standing next to some attraction of St. Petersburg, for example, the Singer's House, with the specified coordinates (59.9355354, 30.3260765). Calculate the number of stops that are no more than 350 meters away from you.
+
+The coordinates of the stops are in the STOPS table. To calculate the spherical distance in the mass_transport database the CoordinateDistance function was created. The CoordinateDistance (Latitude1, Longitude1, Latitude2, Longitude2) function specification:
+
+Latitude1 — latitude of object 1 (numeric type)
+Longitude1 – longitude of object 1 (numeric type)
+Latitude2 — latitude of object 2 (numeric type)
+Longitude2 – longitude of object 2 (numeric type)
+The result of the function is spherical distance (in meters).
+"""
+
+SELECT COUNT(*) AS stop_count
+FROM STOPS
+WHERE CoordinateDistance(
+    59.9355354, 30.3260765, -- Coordinates of Singer's House
+    LATITUDE, LONGITUDE     -- Coordinates of each stop
+) <= 350;
